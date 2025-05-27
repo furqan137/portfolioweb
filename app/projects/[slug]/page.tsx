@@ -6,12 +6,21 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/data/projects";
 
-// Fix: params should be defined inline in the function, with correct type
-export default async function ProjectPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+interface ProjectPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export async function generateStaticParams() {
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
+
+export const dynamicParams = false;
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = projects.find((p) => p.slug === params.slug);
 
   if (!project) {
@@ -43,6 +52,7 @@ export default async function ProjectPage({
             alt={project.title}
             fill
             className="object-cover"
+            priority
           />
         </div>
 
@@ -64,7 +74,9 @@ export default async function ProjectPage({
 
           {project.challenges && (
             <>
-              <h2 className="text-2xl font-bold mt-8 mb-4">Challenges & Solutions</h2>
+              <h2 className="text-2xl font-bold mt-8 mb-4">
+                Challenges & Solutions
+              </h2>
               <ul className="list-disc pl-6 space-y-2">
                 {project.challenges.map((challenge, index) => (
                   <li key={index}>{challenge}</li>
@@ -122,11 +134,4 @@ export default async function ProjectPage({
       </div>
     </div>
   );
-}
-
-// Optional: Pre-generates pages for all slugs at build time
-export async function generateStaticParams() {
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
 }
