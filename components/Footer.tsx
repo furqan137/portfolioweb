@@ -46,16 +46,16 @@ export function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Connect</h3>
             <div className="flex space-x-4">
-              <Link href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Link href="https://github.com/furqan137" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
               </Link>
-              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Link href="https://www.linkedin.com/in/furqan-zafar-426727253/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
               </Link>
               <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                 <Twitter className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
               </Link>
-              <Link href="mailto:furqan@example.com" aria-label="Email">
+              <Link href="mailto:furqanjee424@gmail.com" aria-label="Email">
                 <Mail className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
               </Link>
             </div>

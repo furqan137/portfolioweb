@@ -20,19 +20,19 @@ const experiences = [
   {
     title: "Freelance Developer",
     company: "Upwork & Fiverr",
-    period: "2020 - Present",
-    description: "Top-rated freelancer with 100+ successful projects delivered across web and mobile development."
+    period: "2022 - Present",
+    description: "Freelancer with successful projects delivered across web and mobile development."
   },
   {
-    title: "Senior Software Engineer",
-    company: "Tech Solutions Inc.",
-    period: "2020 - Present",
+    title: "Software Engineer",
+    company: "Student Experiences",
+    period: "2022 - Present",
     description: "Lead developer for multiple web applications using React, Node.js, and MongoDB."
   },
   {
     title: "Mobile Developer",
-    company: "App Innovations",
-    period: "2018 - 2020",
+    company: "",
+    period: "2023 - 2024",
     description: "Developed cross-platform mobile applications using Flutter and Firebase."
   }
 ];
