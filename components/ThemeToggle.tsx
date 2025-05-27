@@ -8,6 +8,12 @@ import { motion } from "framer-motion";
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  // Only render icons after component is mounted
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <Button
@@ -21,11 +27,11 @@ export function ThemeToggle() {
         animate={{ opacity: 1, rotate: 0 }}
         transition={{ duration: 0.3 }}
       >
-        {theme === "light" ? (
+        {mounted && theme === "light" ? (
           <Moon className="h-5 w-5" />
-        ) : (
+        ) : mounted ? (
           <Sun className="h-5 w-5" />
-        )}
+        ) : null}
       </motion.div>
       <span className="sr-only">Toggle theme</span>
     </Button>
