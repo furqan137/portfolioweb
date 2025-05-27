@@ -5,6 +5,8 @@ import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/data/projects";
+import { fetchData } from '../lib/api'; // Adjust the path based on your project structure
+
 
 interface ProjectPageProps {
   params: {
@@ -19,6 +21,37 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = false;
+
+// pages/[slug].tsx
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { slug: 'example' } },
+    ],
+    fallback: false,
+  };
+}
+
+async function fetchData(slug: string) {
+  // Replace this with real logic (like fetching from an API or local file)
+  return {
+    title: `Post: ${slug}`,
+    content: 'This is a test post content.',
+  };
+}
+
+
+export async function getStaticProps({ params }: { params: { slug: string } }) {
+  const data = await fetchData(params.slug);
+
+  return {
+    props: {
+      data,
+    },
+  };
+}
+
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = projects.find((p) => p.slug === params.slug);
