@@ -6,15 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/data/projects";
 
-// Proper type definition for route parameters
-interface ProjectPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-// Make function async (required for App Router dynamic routes)
-export default async function ProjectPage({ params }: ProjectPageProps) {
+// Fix: params should be defined inline in the function, with correct type
+export default async function ProjectPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const project = projects.find((p) => p.slug === params.slug);
 
   if (!project) {
