@@ -6,11 +6,19 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/data/projects";
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+// Proper type definition for route parameters
+interface ProjectPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+// Make function async (required for App Router dynamic routes)
+export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = projects.find((p) => p.slug === params.slug);
 
   if (!project) {
-    return notFound(); // ✅ Ensure control flow stops here
+    notFound();
   }
 
   return (
@@ -23,7 +31,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
-        
+
         <div className="flex flex-wrap gap-2 mb-6">
           {project.technologies.map((tech) => (
             <Badge key={tech} variant="secondary">
@@ -42,7 +50,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
 
         <div className="prose dark:prose-invert max-w-none mb-8">
-          <p className="text-lg mb-4">{project.fullDescription || project.description}</p>
+          <p className="text-lg mb-4">
+            {project.fullDescription || project.description}
+          </p>
 
           {project.features && (
             <>
@@ -72,7 +82,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <h2 className="text-2xl font-bold mt-8 mb-6">Screenshots</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {project.screenshots.map((screenshot, index) => (
-                <div key={index} className="relative aspect-video rounded-lg overflow-hidden">
+                <div
+                  key={index}
+                  className="relative aspect-video rounded-lg overflow-hidden"
+                >
                   <Image
                     src={screenshot}
                     alt={`${project.title} screenshot ${index + 1}`}
@@ -88,14 +101,22 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <div className="flex gap-4 mt-8">
           {project.demoLink && (
             <Button asChild>
-              <Link href={project.demoLink} target="_blank" rel="noopener noreferrer">
+              <Link
+                href={project.demoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ExternalLink className="mr-2 h-4 w-4" /> View Live Demo
               </Link>
             </Button>
           )}
           {project.githubLink && (
             <Button variant="outline" asChild>
-              <Link href={project.githubLink} target="_blank" rel="noopener noreferrer">
+              <Link
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Github className="mr-2 h-4 w-4" /> View Source Code
               </Link>
             </Button>
@@ -104,4 +125,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       </div>
     </div>
   );
+}
+
+// Optional: Pre-generates pages for all slugs at build time
+export async function generateStaticParams() {
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
 }
