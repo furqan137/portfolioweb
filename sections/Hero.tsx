@@ -49,7 +49,7 @@ export function Hero() {
         className="max-w-xl text-muted-foreground mb-12"
       >
         Specialized in creating beautiful, functional, and user-friendly digital experiences.
-        Top-rated freelancer on Upwork and Fiverr with a track record of successful projects.
+        freelancer with a track record of successful projects.
       </motion.p>
 
       <motion.div
